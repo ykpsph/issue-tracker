@@ -1,0 +1,66 @@
+﻿@model IEnumerable<AddingBootstrapTheme.Models.Police>
+
+@{
+    ViewBag.Title = "Index";
+    // validating the view. cuz we don't want unloggedin users to see.
+    if(Session["Username"]==null)
+    {
+        Response.Redirect("~/Account/Login", false);
+    }
+}
+
+<h2>Officers Overview</h2>
+
+<p>
+    @Html.ActionLink("Add +  Officer", "Create", "Police", new {@class = "btn btn-info" })
+</p>
+
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            Department
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Age)
+                        </th>
+                        <th>
+                            ACTIONS
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Department.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Age)
+                            </td>
+                            <td>
+
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-info" }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-warning" }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-success" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

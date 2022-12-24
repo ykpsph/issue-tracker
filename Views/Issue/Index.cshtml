@@ -1,0 +1,65 @@
+﻿@model IEnumerable<AddingBootstrapTheme.Models.Issue>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Add+  Issue", "Create", "Issue", new { @class = "btn btn-info" })
+</p>
+
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            Assigned to
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IssuedOn)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Deadline)
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Username)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IssuedOn)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Deadline)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
